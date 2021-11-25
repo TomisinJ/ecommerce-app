@@ -3,7 +3,8 @@ E-Commerce App
 <!-- Steps: 
 
 npx create-react-app
-install dependencies: yarn -->
+install dependencies: yarn
+run with: yarn start -->
 
 <!-- # Getting Started with Create React App
 
