@@ -4,7 +4,13 @@ E-Commerce App
 
 npx create-react-app
 install dependencies: yarn
-run with: yarn start -->
+run with: yarn start
+yarn add styled-components
+(using material ui for icons)
+yarn add @mui/core @material-ui/icons
+yarn add @emotion/react
+yarn add @emotion/styled
+ -->
 
 <!-- # Getting Started with Create React App
 
