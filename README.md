@@ -1,5 +1,9 @@
 E-Commerce App
 
+<!-- Steps: 
+
+npx create-react-app
+install dependencies: yarn -->
 
 <!-- # Getting Started with Create React App
 
