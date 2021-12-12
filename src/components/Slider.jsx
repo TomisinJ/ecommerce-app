@@ -1,7 +1,8 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
-
+import { sliderItems } from '../data'
+import { useState } from 'react'
 
 const Container = styled.div`
   width: 100%;
@@ -28,11 +29,14 @@ const Arrow = styled.div`
   margin: auto;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 2;
 `
 
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `
 
 const Slide = styled.div`
@@ -73,44 +77,36 @@ const Button = styled.button`
 `
 
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+
+    if(direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
+
   return (
     <Container>
-      <Arrow direction="left">
+      <Arrow direction="left" onClick={()=>handleClick("left")}>
         <ArrowLeftOutlined/>
       </Arrow>
-      <Wrapper>
-        <Slide bg="f5fafd">
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map(item=>(
+          <Slide bg={item.bg}>
           <ImgContainer>
-            <Image src="https://cdn.shopify.com/s/files/1/0174/0580/4598/products/3993658_TEAA_1_27c33f50-8a37-4330-b235-033cf0f293e4_1296x.jpg?v=1638495245" />
+            <Image src={item.img} />
           </ImgContainer>
           <InfoContainer>
-            <Title>WINTER SALE</Title>
-            <Desc>30% OFF NEW ARRIVALS. DON'T MISS THIS ONE TIME ONLY SALE</Desc>
+            <Title>{item.title}</Title>
+            <Desc>{item.desc}</Desc>
             <Button>SHOP NOW</Button>
           </InfoContainer>
         </Slide>
-        <Slide bg="fcf1ed">
-          <ImgContainer>
-            <Image src="https://cdn.shopify.com/s/files/1/0174/0580/4598/products/3993658_TEAA_1_27c33f50-8a37-4330-b235-033cf0f293e4_1296x.jpg?v=1638495245" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>SPRING SALE</Title>
-            <Desc>30% OFF NEW ARRIVALS. DON'T MISS THIS ONE TIME ONLY SALE</Desc>
-            <Button>SHOP NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide bg="fbf0f4">
-          <ImgContainer>
-            <Image src="https://cdn.shopify.com/s/files/1/0174/0580/4598/products/3993658_TEAA_1_27c33f50-8a37-4330-b235-033cf0f293e4_1296x.jpg?v=1638495245" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>AUTUMN SALE</Title>
-            <Desc>30% OFF NEW ARRIVALS. DON'T MISS THIS ONE TIME ONLY SALE</Desc>
-            <Button>SHOP NOW</Button>
-          </InfoContainer>
-        </Slide>
+        ))}
       </Wrapper>
-      <Arrow direction="right">
+      <Arrow direction="right" onClick={()=>handleClick("right")}>
         <ArrowRightOutlined/>
       </Arrow>
     </Container>
